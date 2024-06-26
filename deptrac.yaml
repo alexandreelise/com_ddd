@@ -1,0 +1,71 @@
+# deptrac.yaml
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#'
+    - '#.*Test.*#'
+  layers:
+    - name: Infrastructure
+      collectors:
+        - type: className
+          regex: AlexApi\\Component\\Ddd\\.*
+        - type: className
+          regex: Joomla\\CMS\\.*
+        - type: className
+          regex: JLoader
+
+    - name: Application
+      collectors:
+        - type: className
+          regex: AlexApi\\Application\\Ddd\\.*
+
+    - name: Domain
+      collectors:
+        - type: className
+          regex: AlexApi\\Domain\\Ddd\\.*
+
+    - name: Library
+      collectors:
+        - type: className
+          regex: Joomla\\((?!CMS)(\\)?).*
+        - type: className
+          regex: Tobscure\\.*
+        - type: className
+          regex: Psr\\.*
+        - type: className
+          regex: Negotiation\\.*
+        - type: className
+          regex: PHPMailer\\.*
+
+    - name: Internal
+      collectors:
+        - type: php_internal
+          value: .+
+        - type: php_internal
+          value: ^Override$
+
+  ruleset:
+    Infrastructure:
+      - Infrastructure
+      - Application
+      - Domain
+      - Library
+      - Internal
+    Application:
+      - Application
+      - Domain
+      - Library
+      - Internal
+    Domain:
+      - Domain
+      - Library
+      - Internal
+
+  formatters:
+    graphviz:
+      pointToGroups: true
+      groups:
+        Domain:
+        Application:
+        Infrastructure:

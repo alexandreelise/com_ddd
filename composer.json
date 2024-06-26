@@ -1,0 +1,49 @@
+{
+  "config": {
+    "github-protocols": [
+      "https"
+    ],
+    "optimize-autoloader": true,
+    "allow-plugins": true,
+    "sort-packages": true
+  },
+  "prefer-stable": true,
+  "require": {
+    "php": "^8.1",
+    "ext-curl": "*",
+    "ext-gd": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-simplexml": "*"
+  },
+  "require-dev": {
+    "qossmic/deptrac-shim": "^1.0",
+    "rector/rector": "^1.0"
+  },
+  "scripts": {
+    "gen": [
+      "@minimal",
+      "@build"
+    ],
+    "build": "export current_hash=\"$(git log HEAD -n 1 --pretty=format:\"%H\")\" && { mkdir -p ./build && cd ./src [ ! -f \"$(dirname $PWD)/build/$(basename $(dirname $PWD))_${current_hash}.zip\" ] && zip -9 -r $(dirname $PWD)/build/$(basename $(dirname $PWD))_${current_hash}.zip . && cd .. ; }",
+    "docs": [
+      "@putenv NO_COLOR=1",
+      "tools/phpdoc"
+    ],
+    "deptrac": [
+      "@putenv NO_COLOR=1",
+      "vendor/bin/deptrac --report-uncovered"
+    ],
+    "refactor-try": [
+      "vendor/bin/rector --dry-run --config=rector.php --no-ansi"
+    ],
+    "refactor-apply": [
+      "vendor/bin/rector --config=rector.php --no-ansi"
+    ],
+    "minimal": [
+      "@refactor-apply",
+      "@deptrac",
+      "@docs"
+    ]
+  }
+}
