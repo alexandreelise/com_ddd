@@ -14,6 +14,7 @@ declare(strict_types=1);
 
 defined('_JEXEC') or die;
 
+use AlexApi\Component\Ddd\Administrator\ServiceProvider\ApplicationServiceProvider;
 use AlexApi\Component\Ddd\Administrator\ServiceProvider\DomainServiceProvider;
 use Joomla\CMS\Dispatcher\ComponentDispatcherFactoryInterface;
 use Joomla\CMS\Extension\ComponentInterface;
@@ -49,7 +50,7 @@ return new class implements ServiceProviderInterface {
 
         // Load Application Layer
         $container->registerServiceProvider(
-            new DomainServiceProvider('\\AlexApi\\Application\\Ddd\\')
+            new ApplicationServiceProvider('\\AlexApi\\Application\\Ddd\\')
         );
 
         $container->registerServiceProvider(
