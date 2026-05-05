@@ -1,5 +1,4 @@
-# Component - DDD
-
+# Joomla Custom Component using Domain Driven Design (DDD)
 ![visitor badge](https://visitor-badge.laobi.icu/badge?page_id=alexandreelise.com_ddd&style=flat&format=true)
 ![GitHub followers](https://img.shields.io/github/followers/alexandreelise?style=flat)
 ![YouTube Channel Views](https://img.shields.io/youtube/channel/views/UCCya8rIL-PVHm8Mt4QPW-xw?style=flat&label=YouTube%20%40Api%20Adept%20vues)
